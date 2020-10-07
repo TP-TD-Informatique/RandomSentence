@@ -18,7 +18,8 @@ public class RegisterList {
 
     /**
      * Constructeur de la liste des registre via une HashMap<> existante
-     * @param registers HashMap<String, Register>
+     *
+     * @param registers      HashMap<String, Register>
      * @param actualRegister String
      */
     public RegisterList(HashMap<String, Register> registers, String actualRegister) {
@@ -35,14 +36,16 @@ public class RegisterList {
 
     /**
      * Créé un nouveau registre
+     *
      * @param name String
      */
     public void create(String name) {
-        registers.put(name, new Register());
+        registers.put(name, new Register(name));
     }
 
     /**
      * Supprime un registre
+     *
      * @param name String
      */
     public void remove(String name) {
@@ -52,6 +55,7 @@ public class RegisterList {
     /**
      * Permet de choisir le registre à utiliser
      * Renvoie false si le registre n'existe pas
+     *
      * @param name String
      * @return boolean
      */
@@ -66,6 +70,7 @@ public class RegisterList {
     /**
      * Renvoie le registre en cours d'utilisation
      * Renvoie null si le registre n'existe pas ou si aucun registre n'a été choisis
+     *
      * @return Register
      */
     public Register getRegister() {
@@ -78,6 +83,7 @@ public class RegisterList {
 
     /**
      * Renvoie la liste des noms des registres
+     *
      * @return ArrayList<String>
      */
     public ArrayList<String> getRegistersName() {
@@ -86,6 +92,7 @@ public class RegisterList {
 
     /**
      * Renvoie la liste des registres
+     *
      * @return HashMap<String, Register>
      */
     public HashMap<String, Register> getRegisters() {
@@ -94,6 +101,7 @@ public class RegisterList {
 
     /**
      * Renvoie le nom du registre utilisé
+     *
      * @return String
      */
     public String getActualRegister() {

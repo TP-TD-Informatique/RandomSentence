@@ -3,11 +3,16 @@ package fr.kevin.randomsentence.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Le registre qui contient les associations de mots vers des ArrayList<> de mots
  */
 public class Register {
+    /**
+     * Le nom du registre
+     */
+    private String name;
     /**
      * Cette HashMap<> associe à chaque mot une ArrayList<> de mots qui sont les mots qui peuvent suivre
      */
@@ -15,22 +20,25 @@ public class Register {
 
     /**
      * Constructeur du registre à partir d'une HashMap<> existante
+     *
      * @param words HashMap<String, ArrayList<String>>
      */
-    public Register(HashMap<String, ArrayList<String>> words) {
+    public Register(String name, HashMap<String, ArrayList<String>> words) {
+        this.name = name;
         this.words = words;
     }
 
     /**
      * Constructeur par défaut pour créer un nouveau registre
      */
-    public Register() {
-        this(new HashMap<String, ArrayList<String>>());
+    public Register(String name) {
+        this(name, new HashMap<String, ArrayList<String>>());
     }
 
     /**
      * Ajoute une nouvelle association au mot 'word'
-     * @param word String
+     *
+     * @param word     String
      * @param nextWord String
      */
     private void add(String word, String nextWord) {
@@ -41,6 +49,7 @@ public class Register {
 
     /**
      * Découpe la chaine 'sentence' autour des espaces et créé les associations pour remplir le registre
+     *
      * @param sentence String
      */
     public void add(String sentence) {
@@ -55,6 +64,7 @@ public class Register {
 
     /**
      * Renvoie 'quantity' mots généré aléatoirement
+     *
      * @param quantity int
      * @return String
      */
@@ -73,6 +83,7 @@ public class Register {
 
     /**
      * Renvoie le nombre d'associations existantes dans ce registre
+     *
      * @return int
      */
     public int size() {
@@ -87,6 +98,7 @@ public class Register {
 
     /**
      * Renvoie un mot aléatoire dans l'ArrayList<> de 'word'
+     *
      * @param word String
      * @return String
      */
@@ -100,6 +112,7 @@ public class Register {
 
     /**
      * Renvoie un entier aléatoire en 0 et 'end'
+     *
      * @param end int
      * @return int
      */
@@ -109,6 +122,7 @@ public class Register {
 
     /**
      * Découpe sentence autour des espaces en prenant en compte la ponctuation
+     *
      * @param sentence String
      * @return ArrayList<String>
      */
@@ -136,5 +150,22 @@ public class Register {
             result.add(word.toString());
 
         return result;
+    }
+
+    /**
+     * Renvoie le nom du registre
+     *
+     * @return String
+     */
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<String> getAssoc(String word) {
+        return words.get(word);
+    }
+
+    public Set<String> getWords() {
+        return words.keySet();
     }
 }
