@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Random Sentence</string>
+    <string name="main_generate_btn">Generate</string>
+
+    <string name="main_database_name_info">Base de données courante</string>
+    <string name="main_generate_btn_info">Génère un texte</string>
+    <string name="main_copy_generated_text">Text copié</string>
 </resources>
