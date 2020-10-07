@@ -1,8 +1,10 @@
-package fr.kevin.randomsentence;
+package fr.kevin.randomsentence.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import fr.kevin.randomsentence.R;
 
 public class MainActivity extends AppCompatActivity {
 
