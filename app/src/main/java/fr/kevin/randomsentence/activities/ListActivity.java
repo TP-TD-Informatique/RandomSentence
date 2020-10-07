@@ -1,5 +1,6 @@
 package fr.kevin.randomsentence.activities;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -12,13 +13,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.HashMap;
+
 import fr.kevin.randomsentence.R;
 import fr.kevin.randomsentence.adapter.RegisterAdapter;
+import fr.kevin.randomsentence.model.Register;
 import fr.kevin.randomsentence.model.RegisterList;
+import fr.kevin.randomsentence.storage.RegistersJsonFileStorage;
 
 public class ListActivity extends AppCompatActivity {
-    public static final String REGISTER_LIST = "register_list";
-
     private RegisterList registerList;
 
     private RecyclerView list;
@@ -28,7 +31,7 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        registerList = (RegisterList) getIntent().getSerializableExtra(REGISTER_LIST);
+        start();
 
         list = findViewById(R.id.list_database_list);
         list.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -40,19 +43,40 @@ public class ListActivity extends AppCompatActivity {
                 registerList.choose(name);
                 ((RegisterHolder) list.getChildViewHolder(v)).item_layout.setBackgroundColor(getColor(R.color.colorPrimary));
             }
-
             @Override
             public boolean onItemLongClick(View v) {
-                Toast.makeText(getApplicationContext(), "Modifier la base de données", Toast.LENGTH_SHORT).show();
-                return false;
+                String name = String.valueOf(((RegisterHolder) list.getChildViewHolder(v)).database_name.getText());
+                Intent intent = new Intent(getApplicationContext(), ModifyActivity.class);
+                intent.putExtra(ModifyActivity.REGISTER, registerList.getRegisters().get(name));
+                startActivity(intent);
+                return true;
             }
         });
 
         findViewById(R.id.list_database_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Add a database", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), ModifyActivity.class);
+                startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        start();
+    }
+
+    private void start() {
+        registerList = new RegisterList();
+        registerList.create("latin");
+        registerList.choose("latin");
+        registerList.getRegister().add("Sed ultrices justo a ligula fermentum, in accumsan metus laoreet. Praesent non orci eget ante faucibus sagittis. Vestibulum quis ultricies lorem. Sed vel maximus mauris, in fermentum nisi. Morbi vitae leo ut elit venenatis accumsan sed vel leo. Duis lobortis maximus nunc, vel pellentesque erat porta a. In fermentum bibendum magna, sit amet tristique nisi. Cras id fringilla augue, at vulputate nibh. Nulla iaculis, tellus eu scelerisque congue, leo urna cursus nibh, eget varius lacus mauris in lacus. Morbi vitae ligula quis augue tempor vulputate quis sed eros. Cras id velit sed ante blandit semper. Sed vitae tincidunt risus. Aenean velit ipsum, lobortis et ante ut, scelerisque efficitur velit. Suspendisse congue vehicula augue et sagittis.");
+
+        if (registerList.getRegistersName().isEmpty()) {
+            Intent intent = new Intent(getApplicationContext(), ModifyActivity.class);
+            startActivity(intent);
+        }
     }
 }

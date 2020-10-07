@@ -21,6 +21,18 @@
             android:paddingVertical="20dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
+
+        <EditText
+            android:id="@+id/main_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="number"
+            android:text="10"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
         <Button
             android:id="@+id/main_generate_btn"
             style="@style/Widget.AppCompat.Button.Colored"

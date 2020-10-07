@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,15 +24,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        registerList = new RegisterList();
+        start();
 
-        String register = registerList.getActualRegister();
-        ((TextView) findViewById(R.id.main_database_name)).setText(!register.equals("") ? register : getString(R.string.main_database_name_error));
         findViewById(R.id.main_database_name).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-                intent.putExtra(ListActivity.REGISTER_LIST, registerList);
                 startActivity(intent);
             }
         });
@@ -42,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.main_generate_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = registerList.getRegister().generate(
+                        Integer.parseInt(((EditText) findViewById(R.id.main_quantity)).getText().toString()));
+                ((TextView) findViewById(R.id.main_generated_text)).setText(text);
+            }
+        });
         findViewById(R.id.main_generate_btn).setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -61,5 +68,24 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        start();
+    }
+
+    private void start() {
+        registerList = new RegisterList();
+        registerList.create("latin");
+        registerList.choose("latin");
+        registerList.getRegister().add("Sed ultrices justo a ligula fermentum, in accumsan metus laoreet. Praesent non orci eget ante faucibus sagittis. Vestibulum quis ultricies lorem. Sed vel maximus mauris, in fermentum nisi. Morbi vitae leo ut elit venenatis accumsan sed vel leo. Duis lobortis maximus nunc, vel pellentesque erat porta a. In fermentum bibendum magna, sit amet tristique nisi. Cras id fringilla augue, at vulputate nibh. Nulla iaculis, tellus eu scelerisque congue, leo urna cursus nibh, eget varius lacus mauris in lacus. Morbi vitae ligula quis augue tempor vulputate quis sed eros. Cras id velit sed ante blandit semper. Sed vitae tincidunt risus. Aenean velit ipsum, lobortis et ante ut, scelerisque efficitur velit. Suspendisse congue vehicula augue et sagittis.");
+
+        String register = registerList.getActualRegister();
+        ((TextView) findViewById(R.id.main_database_name)).setText(!register.equals("") ? register : getString(R.string.main_database_name_error));
+        if (register.equals("")) {
+            ((Button) findViewById(R.id.main_generate_btn)).setEnabled(false);
+        }
     }
 }
