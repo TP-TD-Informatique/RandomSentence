@@ -1,5 +1,6 @@
 package fr.kevin.randomsentence.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
@@ -8,7 +9,7 @@ import java.util.Set;
 /**
  * Le registre qui contient les associations de mots vers des ArrayList<> de mots
  */
-public class Register {
+public class Register implements Serializable {
     /**
      * Le nom du registre
      */

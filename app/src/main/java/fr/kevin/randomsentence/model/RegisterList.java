@@ -1,12 +1,13 @@
 package fr.kevin.randomsentence.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Liste et gère tout les registres existant
  */
-public class RegisterList {
+public class RegisterList implements Serializable {
     /**
      * La liste des registres
      */
