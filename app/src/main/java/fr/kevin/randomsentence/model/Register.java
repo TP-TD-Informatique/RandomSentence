@@ -1,10 +1,11 @@
 package fr.kevin.randomsentence.model;
 
+import androidx.annotation.Nullable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Le registre qui contient les associations de mots vers des ArrayList<> de mots
@@ -162,11 +163,10 @@ public class Register implements Serializable {
         return name;
     }
 
-    public ArrayList<String> getAssoc(String word) {
-        return words.get(word);
-    }
-
-    public Set<String> getWords() {
-        return words.keySet();
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj instanceof Register)
+            return name.equals(((Register) obj).name);
+        return false;
     }
 }

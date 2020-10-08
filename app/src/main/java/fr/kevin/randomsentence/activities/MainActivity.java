@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import fr.kevin.randomsentence.R;
+import fr.kevin.randomsentence.model.Register;
 import fr.kevin.randomsentence.model.RegisterList;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.main_generate_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text = registerList.getRegister().generate(
+                String text = registerList.getActualRegister().generate(
                         Integer.parseInt(((EditText) findViewById(R.id.main_quantity)).getText().toString()));
                 ((TextView) findViewById(R.id.main_generated_text)).setText(text);
             }
@@ -78,11 +79,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void start() {
         registerList = new RegisterList();
-        registerList.create("latin");
+        registerList.add(new Register("latin"));
         registerList.choose("latin");
-        registerList.getRegister().add("Sed ultrices justo a ligula fermentum, in accumsan metus laoreet. Praesent non orci eget ante faucibus sagittis. Vestibulum quis ultricies lorem. Sed vel maximus mauris, in fermentum nisi. Morbi vitae leo ut elit venenatis accumsan sed vel leo. Duis lobortis maximus nunc, vel pellentesque erat porta a. In fermentum bibendum magna, sit amet tristique nisi. Cras id fringilla augue, at vulputate nibh. Nulla iaculis, tellus eu scelerisque congue, leo urna cursus nibh, eget varius lacus mauris in lacus. Morbi vitae ligula quis augue tempor vulputate quis sed eros. Cras id velit sed ante blandit semper. Sed vitae tincidunt risus. Aenean velit ipsum, lobortis et ante ut, scelerisque efficitur velit. Suspendisse congue vehicula augue et sagittis.");
+        registerList.getActualRegister().add("Sed ultrices justo a ligula fermentum, in accumsan metus laoreet. Praesent non orci eget ante faucibus sagittis. Vestibulum quis ultricies lorem. Sed vel maximus mauris, in fermentum nisi. Morbi vitae leo ut elit venenatis accumsan sed vel leo. Duis lobortis maximus nunc, vel pellentesque erat porta a. In fermentum bibendum magna, sit amet tristique nisi. Cras id fringilla augue, at vulputate nibh. Nulla iaculis, tellus eu scelerisque congue, leo urna cursus nibh, eget varius lacus mauris in lacus. Morbi vitae ligula quis augue tempor vulputate quis sed eros. Cras id velit sed ante blandit semper. Sed vitae tincidunt risus. Aenean velit ipsum, lobortis et ante ut, scelerisque efficitur velit. Suspendisse congue vehicula augue et sagittis.");
 
-        String register = registerList.getActualRegister();
+        String register = registerList.getActualRegister().getName();
         ((TextView) findViewById(R.id.main_database_name)).setText(!register.equals("") ? register : getString(R.string.main_database_name_error));
         if (register.equals("")) {
             ((Button) findViewById(R.id.main_generate_btn)).setEnabled(false);

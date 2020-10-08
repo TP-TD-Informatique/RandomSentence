@@ -1,19 +1,15 @@
 package fr.kevin.randomsentence.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.HashMap;
+import androidx.appcompat.app.AppCompatActivity;
 
 import fr.kevin.randomsentence.R;
 import fr.kevin.randomsentence.model.Register;
 import fr.kevin.randomsentence.model.RegisterList;
-import fr.kevin.randomsentence.storage.RegistersJsonFileStorage;
 
 public class ModifyActivity extends AppCompatActivity {
     public static final String REGISTER = "register";
@@ -73,7 +69,7 @@ public class ModifyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = ((EditText) findViewById(R.id.modify_database_name)).getText().toString();
-                registerList.create(name);
+                registerList.add(new Register(name));
                 finish();
             }
         });
@@ -87,9 +83,9 @@ public class ModifyActivity extends AppCompatActivity {
 
     private void start() {
         registerList = new RegisterList();
-        registerList.create("latin");
+        registerList.add(new Register("latin"));
         registerList.choose("latin");
-        registerList.getRegister().add("Sed ultrices justo a ligula fermentum, in accumsan metus laoreet. Praesent non orci eget ante faucibus sagittis. Vestibulum quis ultricies lorem. Sed vel maximus mauris, in fermentum nisi. Morbi vitae leo ut elit venenatis accumsan sed vel leo. Duis lobortis maximus nunc, vel pellentesque erat porta a. In fermentum bibendum magna, sit amet tristique nisi. Cras id fringilla augue, at vulputate nibh. Nulla iaculis, tellus eu scelerisque congue, leo urna cursus nibh, eget varius lacus mauris in lacus. Morbi vitae ligula quis augue tempor vulputate quis sed eros. Cras id velit sed ante blandit semper. Sed vitae tincidunt risus. Aenean velit ipsum, lobortis et ante ut, scelerisque efficitur velit. Suspendisse congue vehicula augue et sagittis.");
-        register = registerList.getRegister();
+        registerList.getActualRegister().add("Sed ultrices justo a ligula fermentum, in accumsan metus laoreet. Praesent non orci eget ante faucibus sagittis. Vestibulum quis ultricies lorem. Sed vel maximus mauris, in fermentum nisi. Morbi vitae leo ut elit venenatis accumsan sed vel leo. Duis lobortis maximus nunc, vel pellentesque erat porta a. In fermentum bibendum magna, sit amet tristique nisi. Cras id fringilla augue, at vulputate nibh. Nulla iaculis, tellus eu scelerisque congue, leo urna cursus nibh, eget varius lacus mauris in lacus. Morbi vitae ligula quis augue tempor vulputate quis sed eros. Cras id velit sed ante blandit semper. Sed vitae tincidunt risus. Aenean velit ipsum, lobortis et ante ut, scelerisque efficitur velit. Suspendisse congue vehicula augue et sagittis.");
+        register = registerList.getActualRegister();
     }
 }

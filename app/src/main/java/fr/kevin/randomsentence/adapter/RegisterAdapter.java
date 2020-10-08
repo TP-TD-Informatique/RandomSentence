@@ -6,11 +6,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import fr.kevin.randomsentence.R;
+import fr.kevin.randomsentence.model.Register;
 import fr.kevin.randomsentence.model.RegisterList;
 
 public abstract class RegisterAdapter extends RecyclerView.Adapter<RegisterAdapter.RegisterHolder> {
@@ -57,17 +57,14 @@ public abstract class RegisterAdapter extends RecyclerView.Adapter<RegisterAdapt
 
     @Override
     public void onBindViewHolder(@NonNull RegisterHolder holder, int position) {
-        String name = registers.getRegistersName().get(position);
-        holder.database_name.setText(name);
-        holder.database_size.setText(registers.getRegisters().get(name).size());
-        if (registers.getActualRegister().equals(name)) {
-            //holder.item_layout.setBackgroundColor();
-        }
+        Register register = registers.get(position);
+        holder.database_name.setText(register.getName());
+        holder.database_size.setText(String.valueOf(register.size()));
     }
 
     @Override
     public int getItemCount() {
-        return registers.getRegistersName().size();
+        return registers.size();
     }
 
     public abstract void onItemClick(View v);
