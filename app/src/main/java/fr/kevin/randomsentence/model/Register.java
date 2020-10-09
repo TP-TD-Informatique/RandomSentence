@@ -169,4 +169,8 @@ public class Register implements Serializable {
             return name.equals(((Register) obj).name);
         return false;
     }
+
+    public HashMap<String, ArrayList<String>> getWords() {
+        return words;
+    }
 }
