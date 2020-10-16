@@ -1,5 +1,7 @@
 package fr.kevin.randomsentence.adapter;
 
+import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import fr.kevin.randomsentence.R;
@@ -19,6 +22,7 @@ public abstract class RegisterAdapter extends RecyclerView.Adapter<RegisterAdapt
         public LinearLayout item_layout;
         public TextView database_name;
         public TextView database_size;
+        public int registerId;
 
         public RegisterHolder(@NonNull View itemView) {
             super(itemView);
@@ -28,10 +32,12 @@ public abstract class RegisterAdapter extends RecyclerView.Adapter<RegisterAdapt
         }
     }
 
-    private RegisterList registers;
+    private final RegisterList registers;
+    private final Context context;
 
-    public RegisterAdapter(RegisterList registers) {
+    public RegisterAdapter(RegisterList registers, Context context) {
         this.registers = registers;
+        this.context = context;
     }
 
     @NonNull
@@ -55,11 +61,21 @@ public abstract class RegisterAdapter extends RecyclerView.Adapter<RegisterAdapt
         return new RegisterHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull RegisterHolder holder, int position) {
-        Register register = registers.get(position);
+        int id = 0;
+        for (int key : registers.keySet()) {
+            id = key;
+            if (position-- <= 0) break;
+        }
+        Register register = registers.get(id);
         holder.database_name.setText(register.getName());
         holder.database_size.setText(String.valueOf(register.size()));
+        holder.registerId = id;
+        if (id == registers.getRegister()) {
+            ((LinearLayout) holder.itemView.findViewById(R.id.item_layout)).setBackgroundColor(context.getColor(R.color.colorPrimary));
+        }
     }
 
     @Override

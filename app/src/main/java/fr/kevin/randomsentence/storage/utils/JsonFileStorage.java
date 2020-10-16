@@ -5,9 +5,8 @@ import android.content.Context;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * Implémentation de la classe abstraite FileStorage pour les fichier json
@@ -28,6 +27,10 @@ public abstract class JsonFileStorage<T> extends FileStorage<T> {
      * Le nom pour le stockage de l'id suivant
      */
     private final static String NEXT_ID = "next_id";
+    /**
+     * L'id utilisé actuellement
+     */
+    private final static String USE_ID = "use_id";
 
     /**
      * L'objet json pour manipuler la structure de données
@@ -70,6 +73,7 @@ public abstract class JsonFileStorage<T> extends FileStorage<T> {
         try {
             json.put(LIST, new JSONObject());
             json.put(NEXT_ID, 1);
+            json.put(USE_ID, 0);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -118,12 +122,14 @@ public abstract class JsonFileStorage<T> extends FileStorage<T> {
      * @see Storage
      */
     @Override
-    public List<T> findAll() {
-        List<T> result = new ArrayList<>();
+    public HashMap<Integer, T> findAll() {
+        HashMap<Integer, T> result = new HashMap<>();
         try {
             Iterator<String> iterator = json.getJSONObject(LIST).keys();
-            while (iterator.hasNext())
-                result.add(jsonObjectToObject(json.getJSONObject(LIST).getJSONObject(iterator.next())));
+            while (iterator.hasNext()) {
+                String id = iterator.next();
+                result.put(Integer.valueOf(id), jsonObjectToObject(json.getJSONObject(LIST).getJSONObject(id)));
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -184,9 +190,26 @@ public abstract class JsonFileStorage<T> extends FileStorage<T> {
     public void delete(int id) {
         try {
             json.getJSONObject(LIST).remove(String.valueOf(id));
+
+            if (id == json.optInt(USE_ID)) json.put(USE_ID, 0);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         write();
+    }
+
+    @Override
+    public void use(int id) {
+        try {
+            json.put(USE_ID, id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        write();
+    }
+
+    @Override
+    public int getUsed() {
+        return json.optInt(USE_ID);
     }
 }

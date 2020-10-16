@@ -14,11 +14,21 @@ import fr.kevin.randomsentence.model.Register;
 import fr.kevin.randomsentence.storage.utils.JsonFileStorage;
 
 public class RegisterJsonFileStorage extends JsonFileStorage<Register> {
+    public static final String APP_NAME = "randomSentence";
+    private static final String ID = "id";
     private static final String NAME = "name";
     private static final String ASSOCS = "assocs";
 
-    public RegisterJsonFileStorage(Context context, String name) {
-        super(context, name);
+    private static RegisterJsonFileStorage STORAGE;
+
+    public static RegisterJsonFileStorage get(Context context) {
+        if (STORAGE == null) STORAGE = new RegisterJsonFileStorage(context);
+
+        return STORAGE;
+    }
+
+    private RegisterJsonFileStorage(Context context) {
+        super(context, APP_NAME);
     }
 
     @Override
@@ -46,7 +56,7 @@ public class RegisterJsonFileStorage extends JsonFileStorage<Register> {
 
             HashMap<String, ArrayList<String>> assocs = new HashMap<>();
             JSONObject a = jsonObject.getJSONObject(ASSOCS);
-            for (Iterator<String> it = a.keys(); it.hasNext();) {
+            for (Iterator<String> it = a.keys(); it.hasNext(); ) {
                 String word = it.next();
                 ArrayList<String> words = new ArrayList<>();
                 for (int i = 0; i < a.getJSONArray(word).length(); i++) {

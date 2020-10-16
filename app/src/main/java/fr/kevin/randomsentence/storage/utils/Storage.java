@@ -1,5 +1,6 @@
 package fr.kevin.randomsentence.storage.utils;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,10 +16,10 @@ public interface Storage<T> {
     void insert(T object);
 
     /**
-     * Renvoie la liste de tout les objets qui ont été inserrés
-     * @return List<T>
+     * Renvoie la liste de tout les objets qui ont été inserrés avec leurs ids en clé
+     * @return HashMap<Integer, T>
      */
-    List<T> findAll();
+    HashMap<Integer, T> findAll();
 
     /**
      * Renvoie l'objet à l'id donné
@@ -46,4 +47,16 @@ public interface Storage<T> {
      * @param id int
      */
     void delete(int id);
+
+    /**
+     * Choisis l'id à utiliser
+     * @param id int
+     */
+    void use(int id);
+
+    /**
+     * Retourne l'id utilisé
+     * @return int
+     */
+    int getUsed();
 }

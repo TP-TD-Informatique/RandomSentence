@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import fr.kevin.randomsentence.R;
 import fr.kevin.randomsentence.model.Register;
 import fr.kevin.randomsentence.model.RegisterList;
+import fr.kevin.randomsentence.storage.RegisterJsonFileStorage;
 
 public class MainActivity extends AppCompatActivity {
     private RegisterList registerList;
@@ -78,15 +78,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void start() {
-        registerList = new RegisterList();
-        registerList.add(new Register("latin"));
-        registerList.choose("latin");
-        registerList.getActualRegister().add("Sed ultrices justo a ligula fermentum, in accumsan metus laoreet. Praesent non orci eget ante faucibus sagittis. Vestibulum quis ultricies lorem. Sed vel maximus mauris, in fermentum nisi. Morbi vitae leo ut elit venenatis accumsan sed vel leo. Duis lobortis maximus nunc, vel pellentesque erat porta a. In fermentum bibendum magna, sit amet tristique nisi. Cras id fringilla augue, at vulputate nibh. Nulla iaculis, tellus eu scelerisque congue, leo urna cursus nibh, eget varius lacus mauris in lacus. Morbi vitae ligula quis augue tempor vulputate quis sed eros. Cras id velit sed ante blandit semper. Sed vitae tincidunt risus. Aenean velit ipsum, lobortis et ante ut, scelerisque efficitur velit. Suspendisse congue vehicula augue et sagittis.");
+        RegisterJsonFileStorage registerJsonFileStorage = RegisterJsonFileStorage.get(getApplicationContext());
+        registerList = new RegisterList(registerJsonFileStorage.findAll());
+        registerList.choose(registerJsonFileStorage.getUsed());
 
-        String register = registerList.getActualRegister().getName();
-        ((TextView) findViewById(R.id.main_database_name)).setText(!register.equals("") ? register : getString(R.string.main_database_name_error));
-        if (register.equals("")) {
-            ((Button) findViewById(R.id.main_generate_btn)).setEnabled(false);
+        Register register = registerList.getActualRegister();
+        ((TextView) findViewById(R.id.main_database_name)).setText(register == null ? getString(R.string.main_database_name_error) : register.getName());
+        if (register == null) {
+            findViewById(R.id.main_generate_btn).setEnabled(false);
+            findViewById(R.id.main_quantity).setEnabled(false);
+        } else {
+            findViewById(R.id.main_generate_btn).setEnabled(true);
+            findViewById(R.id.main_quantity).setEnabled(true);
         }
     }
 }
