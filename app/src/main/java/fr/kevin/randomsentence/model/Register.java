@@ -106,7 +106,7 @@ public class Register implements Serializable {
      */
     private String getRandom(String word) {
         if (words.get(word) != null) {
-            return Objects.requireNonNull(words.get(word)).get(random(Objects.requireNonNull(words.get(word)).size() - 1));
+            return Objects.requireNonNull(words.get(word)).get(random(Objects.requireNonNull(words.get(word)).size()));
         } else {
             return "";
         }
