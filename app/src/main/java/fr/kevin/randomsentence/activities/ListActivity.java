@@ -61,6 +61,7 @@ public class ListActivity extends AppCompatActivity {
                 int id = ((RegisterHolder) list.getChildViewHolder(v)).registerId;
                 registerJsonFileStorage.use(id);
                 ((RegisterHolder) list.getChildViewHolder(v)).item_layout.setBackgroundColor(getColor(R.color.colorPrimary));
+                onResume();
             }
 
             @Override
