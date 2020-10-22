@@ -13,4 +13,5 @@
     <string name="delete_diagog_message">Êtes vous sûr de vouloir supprimer %1$s ?</string>
     <string name="dialog_positive">Valider</string>
     <string name="dialog_negative">Annuler</string>
+    <string name="create_dialog_title">Ajouter un registre</string>
 </resources>
