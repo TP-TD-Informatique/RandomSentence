@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,8 +36,13 @@ public class CreateDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.dialog_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        RegisterJsonFileStorage.get(getContext()).insert(new Register(((EditText) view.findViewById(R.id.create_name)).getText().toString()));
-                        updatable.update();
+                        String name = ((EditText) view.findViewById(R.id.create_name)).getText().toString();
+                        if (name.isEmpty()) {
+                            Toast.makeText(getContext(), R.string.create_dialog_warning, Toast.LENGTH_SHORT).show();
+                        } else {
+                            RegisterJsonFileStorage.get(getContext()).insert(new Register(((EditText) view.findViewById(R.id.create_name)).getText().toString()));
+                            updatable.update();
+                        }
                     }
                 })
                 .setNegativeButton(R.string.dialog_negative, null)

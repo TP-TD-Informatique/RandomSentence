@@ -14,4 +14,5 @@
     <string name="dialog_negative">Annuler</string>
     <string name="create_dialog_title">Ajouter un registre</string>
     <string name="create_dialog_hint">Nom</string>
+    <string name="create_dialog_warning">Merci de donner un nom</string>
 </resources>
