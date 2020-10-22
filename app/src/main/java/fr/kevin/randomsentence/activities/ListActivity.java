@@ -65,12 +65,11 @@ public class ListActivity extends AppCompatActivity {
             }
 
             @Override
-            public boolean onItemLongClick(View v) {
+            public void onItemModify(View v) {
                 int id = ((RegisterHolder) list.getChildViewHolder(v)).registerId;
                 Intent intent = new Intent(getApplicationContext(), ModifyActivity.class);
                 intent.putExtra(ModifyActivity.REGISTER, id);
                 startActivity(intent);
-                return true;
             }
         });
     }
