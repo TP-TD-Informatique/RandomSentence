@@ -9,4 +9,8 @@
     <string name="modify_add_btn">Add</string>
     <string name="modify_add_sentence_hint">Sentence ...</string>
     <string name="modify_add_sentence_info">Text added</string>
+    <string name="delete_dialog_title">Confirmer la suppression</string>
+    <string name="delete_diagog_message">Êtes vous sûr de vouloir supprimer %1$s ?</string>
+    <string name="dialog_positive">Valider</string>
+    <string name="dialog_negative">Annuler</string>
 </resources>

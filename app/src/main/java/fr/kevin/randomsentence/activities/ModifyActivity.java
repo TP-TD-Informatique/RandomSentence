@@ -10,11 +10,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
 
 import fr.kevin.randomsentence.R;
+import fr.kevin.randomsentence.dialog.DeleteDialogFragment;
+import fr.kevin.randomsentence.dialog.Updatable;
 import fr.kevin.randomsentence.model.Register;
 import fr.kevin.randomsentence.model.RegisterList;
 import fr.kevin.randomsentence.storage.RegisterJsonFileStorage;
 
-public class ModifyActivity extends AppCompatActivity {
+public class ModifyActivity extends AppCompatActivity implements Updatable {
     public static final String REGISTER = "register";
 
     private RegisterJsonFileStorage registerJsonFileStorage;
@@ -61,9 +63,7 @@ public class ModifyActivity extends AppCompatActivity {
         findViewById(R.id.modify_cancel_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = ((EditText) findViewById(R.id.modify_database_name)).getText().toString();
-                registerJsonFileStorage.delete(registerId);
-                finish();
+                (new DeleteDialogFragment(ModifyActivity.this, registerId)).show(getSupportFragmentManager(), "");
             }
         });
     }
@@ -92,5 +92,10 @@ public class ModifyActivity extends AppCompatActivity {
     private void start() {
         registerJsonFileStorage = RegisterJsonFileStorage.get(getApplicationContext());
         registerList = new RegisterList(registerJsonFileStorage.findAll());
+    }
+
+    @Override
+    public void update() {
+        finish();
     }
 }
