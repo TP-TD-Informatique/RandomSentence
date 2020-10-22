@@ -14,7 +14,8 @@
         android:layout_marginVertical="20dp"
         android:gravity="center"
         android:inputType="textPersonName"
-        android:hint="Name"/>
+        android:hint="@string/create_dialog_hint"
+        android:autofillHints="no" />
 
 
 </LinearLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="main_generate_btn">Génerer</string>
+    <string name="main_database_name_info">Registre courant</string>
+    <string name="main_generate_btn_info">Génerer un texte</string>
+    <string name="main_copy_generated_text">Texte copié</string>
+    <string name="main_database_name_error">Aucun registre</string>
+    <string name="modify_add_btn">Ajouter</string>
+    <string name="modify_add_sentence_hint">Texte ...</string>
+    <string name="modify_add_sentence_info">Texte ajouté</string>
+    <string name="delete_dialog_title">Confirmer la suppression</string>
+    <string name="delete_dialog_message">Êtes-vous sur de vouloir supprimer %1$s ?</string>
+    <string name="dialog_positive">Valider</string>
+    <string name="dialog_negative">Annuler</string>
+    <string name="create_dialog_title">Ajouter un registre</string>
+    <string name="create_dialog_hint">Nom</string>
+</resources>

@@ -29,7 +29,7 @@ public class DeleteDialogFragment extends DialogFragment {
         Register register = RegisterJsonFileStorage.get(getContext()).find(id);
         return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.delete_dialog_title)
-                .setMessage(getString(R.string.delete_diagog_message, register.getName()))
+                .setMessage(getString(R.string.delete_dialog_message, register.getName()))
                 .setPositiveButton(R.string.dialog_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
