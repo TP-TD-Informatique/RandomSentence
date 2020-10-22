@@ -71,7 +71,7 @@ public class Register implements Serializable {
      * @return String
      */
     public String generate(int quantity) {
-        StringBuilder builder = new StringBuilder(getRandom(""));
+        StringBuilder builder = new StringBuilder();
         String prec = builder.toString();
 
         for (int i = 0; i < quantity; i++) {
