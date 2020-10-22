@@ -6,66 +6,78 @@
     android:orientation="vertical"
     tools:context=".activities.ModifyActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:background="@color/colorPrimary"
-        android:padding="10dp">
+        android:layout_height="match_parent">
 
-        <ImageButton
-            android:id="@+id/modify_ok_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#0000"
-            android:src="@drawable/ic_check" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <ImageButton
-            android:id="@+id/modify_cancel_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#0000"
-            android:src="@drawable/ic_cancel" />
-
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/modify_database_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/modify_add_sentence"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:hint="@string/modify_add_sentence_hint"
-            android:singleLine="false" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/modify_add_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/colorPrimary"
-            android:text="@string/modify_add_btn" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
+                android:background="@color/colorPrimary"
+                android:padding="10dp">
 
-    </LinearLayout>
+                <ImageButton
+                    android:id="@+id/modify_ok_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#0000"
+                    android:src="@drawable/ic_check" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:id="@+id/modify_cancel_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#0000"
+                    android:src="@drawable/ic_cancel" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/modify_database_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="50dp"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/modify_add_sentence"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:hint="@string/modify_add_sentence_hint"
+                    android:singleLine="false" />
+
+                <Button
+                    android:id="@+id/modify_add_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/modify_add_btn" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
