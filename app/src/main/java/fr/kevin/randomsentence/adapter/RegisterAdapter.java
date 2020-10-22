@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import fr.kevin.randomsentence.R;
 import fr.kevin.randomsentence.model.Register;
 import fr.kevin.randomsentence.model.RegisterList;
@@ -20,6 +22,7 @@ public abstract class RegisterAdapter extends RecyclerView.Adapter<RegisterAdapt
 
     public static class RegisterHolder extends RecyclerView.ViewHolder {
         public LinearLayout item_layout;
+        public FloatingActionButton modify_btn;
         public TextView database_name;
         public TextView database_size;
         public int registerId;
@@ -29,6 +32,7 @@ public abstract class RegisterAdapter extends RecyclerView.Adapter<RegisterAdapt
             item_layout = itemView.findViewById(R.id.item_layout);
             database_name = itemView.findViewById(R.id.item_database_name);
             database_size = itemView.findViewById(R.id.item_database_size);
+            modify_btn = itemView.findViewById(R.id.item_modify);
         }
     }
 
@@ -43,18 +47,18 @@ public abstract class RegisterAdapter extends RecyclerView.Adapter<RegisterAdapt
     @NonNull
     @Override
     public RegisterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_register, parent, false);
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_register, parent, false);
 
-        view.setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.item_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onItemClick(v);
+                onItemClick(view);
             }
         });
-        view.setOnLongClickListener(new View.OnLongClickListener() {
+        view.findViewById(R.id.item_modify).setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                return onItemLongClick(v);
+            public void onClick(View v) {
+                onItemModify(view);
             }
         });
 
@@ -74,7 +78,7 @@ public abstract class RegisterAdapter extends RecyclerView.Adapter<RegisterAdapt
         holder.database_size.setText(String.valueOf(register.size()));
         holder.registerId = id;
         if (id == registers.getRegister()) {
-            ((LinearLayout) holder.itemView.findViewById(R.id.item_layout)).setBackgroundColor(context.getColor(R.color.colorPrimary));
+            holder.itemView.findViewById(R.id.item_layout).setBackgroundColor(context.getColor(R.color.colorPrimary));
         }
     }
 
@@ -85,5 +89,5 @@ public abstract class RegisterAdapter extends RecyclerView.Adapter<RegisterAdapt
 
     public abstract void onItemClick(View v);
 
-    public abstract boolean onItemLongClick(View v);
+    public abstract void onItemModify(View v);
 }

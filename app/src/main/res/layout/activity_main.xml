@@ -7,48 +7,60 @@
     android:orientation="vertical"
     tools:context=".activities.MainActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/main_database_name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="20dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginTop="50dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/main_database_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="20dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
 
-        <EditText
-            android:id="@+id/main_quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:ems="10"
-            android:gravity="center"
-            android:inputType="number"
-            android:text="10"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                <EditText
+                    android:id="@+id/main_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:text="10"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-        <Button
-            android:id="@+id/main_generate_btn"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="@string/main_generate_btn"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
-    </LinearLayout>
+                <Button
+                    android:id="@+id/main_generate_btn"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:text="@string/main_generate_btn"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/main_generated_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.5"
-        android:padding="10dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            <TextView
+                android:id="@+id/main_generated_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:padding="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

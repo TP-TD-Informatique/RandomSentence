@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import fr.kevin.randomsentence.R;
 import fr.kevin.randomsentence.adapter.RegisterAdapter;
+import fr.kevin.randomsentence.dialog.CreateDialogFragment;
+import fr.kevin.randomsentence.dialog.Updatable;
 import fr.kevin.randomsentence.model.RegisterList;
 import fr.kevin.randomsentence.storage.RegisterJsonFileStorage;
 
-public class ListActivity extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity implements Updatable {
     private RegisterList registerList;
 
     private RecyclerView list;
@@ -30,8 +32,7 @@ public class ListActivity extends AppCompatActivity {
         findViewById(R.id.list_database_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ModifyActivity.class);
-                startActivity(intent);
+                (new CreateDialogFragment(ListActivity.this)).show(getSupportFragmentManager(), "");
             }
         });
     }
@@ -65,13 +66,17 @@ public class ListActivity extends AppCompatActivity {
             }
 
             @Override
-            public boolean onItemLongClick(View v) {
+            public void onItemModify(View v) {
                 int id = ((RegisterHolder) list.getChildViewHolder(v)).registerId;
                 Intent intent = new Intent(getApplicationContext(), ModifyActivity.class);
                 intent.putExtra(ModifyActivity.REGISTER, id);
                 startActivity(intent);
-                return true;
             }
         });
+    }
+
+    @Override
+    public void update() {
+        onResume();
     }
 }
