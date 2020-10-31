@@ -27,8 +27,6 @@ public class ListActivity extends AppCompatActivity implements Updatable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        start();
-
         findViewById(R.id.list_database_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,12 +44,10 @@ public class ListActivity extends AppCompatActivity implements Updatable {
     private void start() {
         final RegisterJsonFileStorage registerJsonFileStorage = RegisterJsonFileStorage.get(getApplicationContext());
         registerList = new RegisterList(registerJsonFileStorage.findAll());
-        registerList.choose(registerJsonFileStorage.getUsed());
-
         if (registerList.isEmpty()) {
-            Intent intent = new Intent(getApplicationContext(), ModifyActivity.class);
-            startActivity(intent);
+            (new CreateDialogFragment(ListActivity.this)).show(getSupportFragmentManager(), "");
         }
+        registerList.choose(registerJsonFileStorage.getUsed());
 
         list = findViewById(R.id.list_database_list);
         list.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

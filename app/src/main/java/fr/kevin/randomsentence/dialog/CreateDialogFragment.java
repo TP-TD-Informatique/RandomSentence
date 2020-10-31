@@ -41,8 +41,8 @@ public class CreateDialogFragment extends DialogFragment {
                             Toast.makeText(getContext(), R.string.create_dialog_warning, Toast.LENGTH_SHORT).show();
                         } else {
                             RegisterJsonFileStorage.get(getContext()).insert(new Register(((EditText) view.findViewById(R.id.create_name)).getText().toString()));
-                            updatable.update();
                         }
+                        updatable.update();
                     }
                 })
                 .setNegativeButton(R.string.dialog_negative, null)
