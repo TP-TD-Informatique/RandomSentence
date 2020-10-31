@@ -15,4 +15,8 @@
     <string name="create_dialog_hint">Name</string>
     <string name="app_name" translatable="false">Random Sentence</string>
     <string name="create_dialog_warning">Please enter a name</string>
+    <string name="generation_type">Generation type</string>
+    <string name="generate_word">Words</string>
+    <string name="generate_sentence">Sentences</string>
+    <string name="generate_paragraph">Paragraphs</string>
 </resources>

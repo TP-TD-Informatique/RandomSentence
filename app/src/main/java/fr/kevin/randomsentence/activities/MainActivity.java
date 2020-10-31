@@ -5,17 +5,23 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import fr.kevin.randomsentence.R;
+import fr.kevin.randomsentence.model.GenerateType;
 import fr.kevin.randomsentence.model.Register;
 import fr.kevin.randomsentence.model.RegisterList;
 import fr.kevin.randomsentence.storage.RegisterJsonFileStorage;
+
+import static fr.kevin.randomsentence.model.GenerateType.*;
 
 public class MainActivity extends AppCompatActivity {
     private RegisterList registerList;
@@ -91,5 +97,42 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.main_generate_btn).setEnabled(true);
             findViewById(R.id.main_quantity).setEnabled(true);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        int id = R.id.generate_word;
+        switch (Register.getGenerateType()) {
+            case WORD:
+                id = R.id.generate_word;
+                break;
+            case SENTENCE:
+                id = R.id.generate_sentence;
+                break;
+            case PARAGRAPH:
+                id = R.id.generate_paragraph;
+                break;
+        }
+        menu.findItem(id).setChecked(true);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        GenerateType type = WORD;
+        if (item.getItemId() == R.id.generate_sentence)
+            type = SENTENCE;
+        else if (item.getItemId() == R.id.generate_paragraph)
+            type = PARAGRAPH;
+        Register.setGenerateType(type);
+
+        return true;
     }
 }

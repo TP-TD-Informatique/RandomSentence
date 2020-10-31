@@ -47,11 +47,14 @@
       <w>gerer</w>
       <w>gère</w>
       <w>génère</w>
+      <w>génération</w>
+      <w>générer</w>
       <w>généré</w>
       <w>implémentation</w>
       <w>initialiser</w>
       <w>inserrés</w>
       <w>leurs</w>
+      <w>ligne</w>
       <w>liste</w>
       <w>manipuler</w>
       <w>méthode</w>
@@ -61,17 +64,20 @@
       <w>nouvelle</w>
       <w>objet</w>
       <w>objets</w>
+      <w>paragraphes</w>
       <w>partir</w>
       <w>permet</w>
       <w>peuvent</w>
       <w>ponctuation</w>
       <w>prefixe</w>
       <w>prenant</w>
+      <w>problème</w>
       <w>randomsentence</w>
       <w>registre</w>
       <w>registres</w>
       <w>remplir</w>
       <w>renvoie</w>
+      <w>retour</w>
       <w>retourne</w>
       <w>sont</w>
       <w>stockage</w>
@@ -84,6 +90,7 @@
       <w>utilisé</w>
       <w>valeur</w>
       <w>vers</w>
+      <w>évitant</w>
     </words>
   </dictionary>
 </component>

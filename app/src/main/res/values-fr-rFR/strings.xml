@@ -15,4 +15,8 @@
     <string name="create_dialog_title">Ajouter un registre</string>
     <string name="create_dialog_hint">Nom</string>
     <string name="create_dialog_warning">Merci de donner un nom</string>
+    <string name="generation_type">Type de génération</string>
+    <string name="generate_word">Mots</string>
+    <string name="generate_sentence">Phrases</string>
+    <string name="generate_paragraph">Paragraphes</string>
 </resources>

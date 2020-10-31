@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
+import static fr.kevin.randomsentence.model.GenerateType.*;
+
 /**
  * Le registre qui contient les associations de mots vers des ArrayList<> de mots
  */
@@ -14,11 +16,15 @@ public class Register implements Serializable {
     /**
      * Le nom du registre
      */
-    private String name;
+    private final String name;
     /**
      * Cette HashMap<> associe à chaque mot une ArrayList<> de mots qui sont les mots qui peuvent suivre
      */
-    private HashMap<String, ArrayList<String>> words;
+    private final HashMap<String, ArrayList<String>> words;
+    /**
+     * Le type de texte à générer (mots, phrases, paragraphes)
+     */
+    private static GenerateType generateType = WORD;
 
     /**
      * Constructeur du registre à partir d'une HashMap<> existante
@@ -74,10 +80,32 @@ public class Register implements Serializable {
         StringBuilder builder = new StringBuilder();
         String prec = builder.toString();
 
-        for (int i = 0; i < quantity; i++) {
-            prec = getRandom(prec);
-            builder.append(" ");
-            builder.append(prec);
+        if (!words.containsKey("\n") && generateType == PARAGRAPH)
+            generateType = SENTENCE;
+        if (!words.containsKey(".") && !words.containsKey("!") && !words.containsKey("?") && generateType == SENTENCE)
+            generateType = WORD;
+
+        switch (generateType) {
+            case WORD:
+                for (int i = 0; i < quantity; i++) {
+                    prec = getRandom(prec);
+                    builder.append(" ");
+                    builder.append(prec);
+                }
+                break;
+            case SENTENCE:
+                int i = 0;
+                while (i < quantity) {
+                    prec = getRandom(prec);
+                    builder.append(" ");
+                    builder.append(prec);
+
+                    if (prec.contains("."))
+                        i++;
+                }
+                break;
+            case PARAGRAPH:
+                break;
         }
 
         return builder.toString();
@@ -129,7 +157,7 @@ public class Register implements Serializable {
      * @return ArrayList<String>
      */
     private ArrayList<String> cut(String sentence) {
-        final String delimiters = ",?;.:!";
+        final String delimiters = ",?;.:!\n";
 
         ArrayList<String> result = new ArrayList<>();
 
@@ -172,5 +200,17 @@ public class Register implements Serializable {
 
     public HashMap<String, ArrayList<String>> getWords() {
         return words;
+    }
+
+    /**
+     * Change le type de génération
+     * @param generateType GenerateType
+     */
+    public static void setGenerateType(GenerateType generateType) {
+        Register.generateType = generateType;
+    }
+
+    public static GenerateType getGenerateType() {
+        return generateType;
     }
 }
