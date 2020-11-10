@@ -115,9 +115,6 @@ public class MainActivity extends AppCompatActivity {
             case SENTENCE:
                 id = R.id.generate_sentence;
                 break;
-            case PARAGRAPH:
-                id = R.id.generate_paragraph;
-                break;
         }
         menu.findItem(id).setChecked(true);
 
@@ -129,8 +126,6 @@ public class MainActivity extends AppCompatActivity {
         GenerateType type = WORD;
         if (item.getItemId() == R.id.generate_sentence)
             type = SENTENCE;
-        else if (item.getItemId() == R.id.generate_paragraph)
-            type = PARAGRAPH;
         Register.setGenerateType(type);
 
         return true;

@@ -80,8 +80,6 @@ public class Register implements Serializable {
         StringBuilder builder = new StringBuilder();
         String prec = builder.toString();
 
-        if (!words.containsKey("\n") && generateType == PARAGRAPH)
-            generateType = SENTENCE;
         if (!words.containsKey(".") && !words.containsKey("!") && !words.containsKey("?") && generateType == SENTENCE)
             generateType = WORD;
 
@@ -103,8 +101,6 @@ public class Register implements Serializable {
                     if (prec.contains("."))
                         i++;
                 }
-                break;
-            case PARAGRAPH:
                 break;
         }
 

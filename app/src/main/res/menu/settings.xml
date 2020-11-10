@@ -15,9 +15,5 @@
             android:id="@+id/generate_sentence"
             android:title="@string/generate_sentence"/>
 
-        <item
-            android:id="@+id/generate_paragraph"
-            android:title="@string/generate_paragraph"/>
-
     </group>
 </menu>
