@@ -1,11 +1,9 @@
 package fr.kevin.randomsentence.activities;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,15 +48,13 @@ public class ListActivity extends AppCompatActivity implements Updatable {
         registerList.choose(registerJsonFileStorage.getUsed());
 
         list = findViewById(R.id.list_database_list);
-        list.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        list.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         list.setAdapter(new RegisterAdapter(registerList, getApplicationContext()) {
-            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onItemClick(View v) {
                 int id = ((RegisterHolder) list.getChildViewHolder(v)).registerId;
                 registerJsonFileStorage.use(id);
-                ((RegisterHolder) list.getChildViewHolder(v)).item_layout.setBackgroundColor(getColor(R.color.colorPrimary));
-                onResume();
+                update();
             }
 
             @Override

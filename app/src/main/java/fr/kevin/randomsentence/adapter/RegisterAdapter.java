@@ -73,6 +73,7 @@ public abstract class RegisterAdapter extends RecyclerView.Adapter<RegisterAdapt
             id = key;
             if (position-- <= 0) break;
         }
+
         Register register = registers.get(id);
         holder.database_name.setText(register.getName());
         holder.database_size.setText(String.valueOf(register.size()));
